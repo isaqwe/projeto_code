@@ -2,78 +2,82 @@
 
 namespace App\Controllers;
 
-class Cidades extends BaseController
-{
 
-    //Metodo Index: Chama a pagina inicial referente ao form 
+
+class Cidades extends BaseController
+{   
+
+    // Método index: Chama a página inicial referente ao form
     public function index()
-    {
+    {   
         $data['titulo'] = "Cidades";
         $data['form'] = 'listar';
         $data['cidades'] = array(
-            ['id' => '1', 'cidade' => 'Ceres', 'uf' => 'GO'],
-            ['id' => '2', 'cidade' => 'Goiânia', 'uf' => 'GO'],
-            ['id' => '3', 'cidade' => 'Anápolis', 'uf' => 'GO'],
-            ['id' => '4', 'cidade' => 'Brasília', 'uf' => 'DF'],
-            ['id' => '5', 'cidade' => 'São Paulo', 'uf' => 'SP']
+            ['id'=>'1', 'cidade'=>'Ceres','uf'=>'Go'],
+            ['id'=>'2', 'cidade'=>'Rialma','uf'=>'Go'],
+            ['id'=>'3', 'cidade'=>'Rubiataba','uf'=>'Go'],
+            ['id'=>'4', 'cidade'=>'São Paulo','uf'=>'SP'],
+            ['id'=>'5', 'cidade'=>'Rio de Janeiro','uf'=>'RJ']
+
         );
 
-        return view('cidades/index', $data);
+        return view('cidades/index',$data);
     }
 
-    //Metodo New: Chama o form de cadastro
-    public function new()
-    {
+    // Método new: Chama o formulário de cadastro
+    public function new(){
         $data['titulo'] = "Cidades";
         $data['form'] = 'cadastrar';
-        $data['cidades'] = [
-            'cidades_id' => '',
-            'cidades_nome' => '',
-            'cidades_uf' => ''
+        $data['cidade'] = [
+            'id' => '',
+            'cidade' => '',
+            'uf' => ''
         ];
-        return view('cidades/form', $data);
+        return view('cidades/form',$data);
+
     }
 
-    // Metodo Cadastrar
-    public function create()
-    {
+    // Método Casdastrar
+    public function create(){
         $data['titulo'] = "Cidades";
         $data['form'] = 'listar';
         $cidade = [
-            'id' => 6, 
-            'cidades_nome' => $_POST['cidade_nome'],
-            'uf' => $_POST['cidade_uf']
+            'id'=> 6,
+            'cidade' => $_POST['cidades_nome'],
+            'uf'   => $_POST['cidades_uf']
         ];
 
-        $data['cidade'] = array(
-            ['id' => '1', 'cidade' => 'Ceres', 'uf' => 'GO'],
-            ['id' => '2', 'cidade' => 'Goiânia', 'uf' => 'GO'],
-            ['id' => '3', 'cidade' => 'Anápolis', 'uf' => 'GO'],
-            ['id' => '4', 'cidade' => 'Brasília', 'uf' => 'DF'],
-            ['id' => '5', 'cidade' => 'São Paulo', 'uf' => 'SP']
-        );
+        $data['cidades'] = array(
+            ['id'=>'1', 'cidade'=>'Ceres','uf'=>'Go'],
+            ['id'=>'2', 'cidade'=>'Rialma','uf'=>'Go'],
+            ['id'=>'3', 'cidade'=>'Rubiataba','uf'=>'Go'],
+            ['id'=>'4', 'cidade'=>'São Paulo','uf'=>'SP'],
+            ['id'=>'5', 'cidade'=>'Rio de Janeiro','uf'=>'RJ']
 
+        );
         array_push($data['cidades'], $cidade);
 
-        return view('cidades/index', $data);
+
+        return view('cidades/index',$data);
+
     }
 
-    //fazer a chamada do formulario edit 
-    public function edit($id)
-    {
+    // fazer a chamado do formulario edit
+    public function edit($id){
         $data['titulo'] = "Cidades";
         $data['form'] = 'alterar';
         $data['cidades'] = array(
-            ['id' => '1', 'cidade' => 'Ceres', 'uf' => 'GO'],
-            ['id' => '2', 'cidade' => 'Goiânia', 'uf' => 'GO'],
-            ['id' => '3', 'cidade' => 'Anápolis', 'uf' => 'GO'],
-            ['id' => '4', 'cidade' => 'Brasília', 'uf' => 'DF'],
-            ['id' => '5', 'cidade' => 'São Paulo', 'uf' => 'SP']
-        );
+            ['id'=>'1', 'cidade'=>'Ceres','uf'=>'Go'],
+            ['id'=>'2', 'cidade'=>'Rialma','uf'=>'Go'],
+            ['id'=>'3', 'cidade'=>'Rubiataba','uf'=>'Go'],
+            ['id'=>'4', 'cidade'=>'São Paulo','uf'=>'SP'],
+            ['id'=>'5', 'cidade'=>'Rio de Janeiro','uf'=>'RJ']
 
+        );
         $data['cidade'] = $data['cidades'][$id-1];
 
-        return view('cidades/form', $data);
+        return view('cidades/form',$data);
+
     }
 
 }
