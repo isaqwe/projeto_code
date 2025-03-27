@@ -1,82 +1,118 @@
 <?php
 
 namespace App\Controllers;
-
-
+use App\Models\Cidades as Cidades_model;
 
 class Cidades extends BaseController
-{   
+{
+    private $cidades;
+    //variavel que instancia o model
+    public function __construct(){ 
 
-    // Método index: Chama a página inicial referente ao form
-    public function index()
-    {   
-        $data['titulo'] = "Cidades";
-        $data['form'] = 'listar';
-        $data['cidades'] = array(
-            ['id'=>'1', 'cidade'=>'Ceres','uf'=>'Go'],
-            ['id'=>'2', 'cidade'=>'Rialma','uf'=>'Go'],
-            ['id'=>'3', 'cidade'=>'Rubiataba','uf'=>'Go'],
-            ['id'=>'4', 'cidade'=>'São Paulo','uf'=>'SP'],
-            ['id'=>'5', 'cidade'=>'Rio de Janeiro','uf'=>'RJ']
+        //metodo construtor
+        $this->cidades = new Cidades_model();
+        $data['title'] = 'Cidades';
+        helper('functions'); //chama os metodos auxiliares
+    }
 
-        );
-
+    //
+    public function index(): string
+    {
+        $data['title'] = 'Cidades';
+        $data['cidades'] = $this->cidades->findAll();
         return view('cidades/index',$data);
     }
 
-    // Método new: Chama o formulário de cadastro
-    public function new(){
-        $data['titulo'] = "Cidades";
+    public function new(): string
+    {
+        $data['title'] = 'Cidades';
+        $data['op'] = 'create';
         $data['form'] = 'cadastrar';
-        $data['cidade'] = [
-            'id' => '',
-            'cidade' => '',
-            'uf' => ''
+        $data['cidades'] = (object) [
+            'cidades_nome'=> '',
+            'cidades_uf'=> '',
+            'cidades_id'=> ''
         ];
         return view('cidades/form',$data);
-
     }
+    public function create()
+    {
 
-    // Método Casdastrar
-    public function create(){
-        $data['titulo'] = "Cidades";
-        $data['form'] = 'listar';
-        $cidade = [
-            'id'=> 6,
-            'cidade' => $_POST['cidades_nome'],
-            'uf'   => $_POST['cidades_uf']
-        ];
+        // Checks whether the submitted data passed the validation rules.
+        if(!$this->validate([
+            'cidades_nome' => 'required|max_length[255]|min_length[3]',
+            'cidades_uf' => 'required|max_length[2]|min_length[2]'
+        ])) {
+            
+            // The validation fails, so returns the form.
+            $data['cidades'] = (object) [
+                //'cidades_id' => $_REQUEST['cidades_id'],
+                'cidades_nome' => $_REQUEST['cidades_nome'],
+                'cidades_uf' => $_REQUEST['cidades_uf']
+            ];
+            
+            $data['title'] = 'Cidades';
+            $data['form'] = 'Cadastrar';
+            $data['op'] = 'create';
+            return view('cidades/form',$data);
+        }
 
-        $data['cidades'] = array(
-            ['id'=>'1', 'cidade'=>'Ceres','uf'=>'Go'],
-            ['id'=>'2', 'cidade'=>'Rialma','uf'=>'Go'],
-            ['id'=>'3', 'cidade'=>'Rubiataba','uf'=>'Go'],
-            ['id'=>'4', 'cidade'=>'São Paulo','uf'=>'SP'],
-            ['id'=>'5', 'cidade'=>'Rio de Janeiro','uf'=>'RJ']
 
-        );
-        array_push($data['cidades'], $cidade);
+        $this->cidades->save([
+            'cidades_nome' => $_REQUEST['cidades_nome'],
+            'cidades_uf' => $_REQUEST['cidades_uf']
 
-
+        ]);
+        
+        $data['msg'] = msg('Cadastrado com Sucesso!','success');
+        $data['cidades'] = $this->cidades->findAll();
+        $data['title'] = 'Cidades';
         return view('cidades/index',$data);
 
     }
 
-    // fazer a chamado do formulario edit
-    public function edit($id){
-        $data['titulo'] = "Cidades";
-        $data['form'] = 'alterar';
-        $data['cidades'] = array(
-            ['id'=>'1', 'cidade'=>'Ceres','uf'=>'Go'],
-            ['id'=>'2', 'cidade'=>'Rialma','uf'=>'Go'],
-            ['id'=>'3', 'cidade'=>'Rubiataba','uf'=>'Go'],
-            ['id'=>'4', 'cidade'=>'São Paulo','uf'=>'SP'],
-            ['id'=>'5', 'cidade'=>'Rio de Janeiro','uf'=>'RJ']
+    public function delete($id)
+    {
 
-        );
-        $data['cidade'] = $data['cidades'][$id-1];
+        $this->cidades->where('cidades_id', (int) $id)->delete();
+        $data['msg'] = msg('Deletado com Sucesso!','success');
+        $data['cidades'] = $this->cidades->findAll();
+        $data['title'] = 'Cidades';
+        return view('cidades/index',$data);
+    }
 
+    public function edit($id)
+    {
+        $data['cidades'] = $this->cidades->find(['cidades_id' => (int) $id])[0];
+        $data['title'] = 'Cidades';
+        $data['form'] = 'Alterar';
+        $data['op'] = 'update';
         return view('cidades/form',$data);
+    }
+
+    public function update()
+    {
+        $dataForm = [
+            'cidades_id' => $_REQUEST['cidades_id'],
+            'cidades_uf' => $_REQUEST['cidades_uf'],
+            'cidades_nome' => $_REQUEST['cidades_nome']
+        ];
+
+        $this->cidades->update($_REQUEST['cidades_id'], $dataForm);
+        $data['msg'] = msg('Alterado com Sucesso!','success');
+        $data['cidades'] = $this->cidades->findAll();
+        $data['title'] = 'Cidades';
+        return view('cidades/index',$data);
+    }
+
+    public function search()
+    {
+
+        $data['cidades'] = $this->cidades->like('cidades_nome', $_REQUEST['pesquisar'])->find();
+        $total = count($data['cidades']);
+        $data['msg'] = msg("Dados Encontrados: {$total}",'success');
+        $data['title'] = 'Cidades';
+        return view('cidades/index',$data);
 
     }
 

@@ -6,11 +6,16 @@ use App\Models\Categorias as Categorias_model;
 class Categorias extends BaseController
 {
     private $categorias;
-    public function __construct(){
+    //variavel que instancia o model
+    public function __construct(){ 
+
+        //metodo construtor
         $this->categorias = new Categorias_model();
         $data['title'] = 'Categorias';
-        helper('functions');
+        helper('functions'); //chama os metodos auxiliares
     }
+
+    //
     public function index(): string
     {
         $data['title'] = 'Categorias';
