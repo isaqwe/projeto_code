@@ -12,6 +12,12 @@
         <li class="nav-item">
           <a class="nav-link" href="<?= base_url('cidades')?>">Cidades</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url('categorias')?>">Categorias</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url('produtos')?>">Produtos</a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
