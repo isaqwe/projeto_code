@@ -4,15 +4,15 @@ namespace App\Controllers;
 use App\Models\Cidades as Cidades_model;
 
 class Cidades extends BaseController
-{
-    private $cidades;
-    //variavel que instancia o model
-    public function __construct(){ 
-
-        //metodo construtor
-        $this->cidades = new Cidades_model();
+{   
+    // variavel que recebe a instancia do model
+    private $cidades; 
+    
+    // metodo construtor
+    public function __construct(){
+        $this->cidades = new Cidades_model(); // instancia do model
         $data['title'] = 'Cidades';
-        helper('functions'); //chama os metodos auxiliares
+        helper('functions'); // chama os metodos auxiliares
     }
 
     //
@@ -35,6 +35,8 @@ class Cidades extends BaseController
         ];
         return view('cidades/form',$data);
     }
+
+    
     public function create()
     {
 
@@ -94,8 +96,8 @@ class Cidades extends BaseController
     {
         $dataForm = [
             'cidades_id' => $_REQUEST['cidades_id'],
-            'cidades_uf' => $_REQUEST['cidades_uf'],
-            'cidades_nome' => $_REQUEST['cidades_nome']
+            'cidades_nome' => $_REQUEST['cidades_nome'],
+            'cidades_uf' => $_REQUEST['cidades_uf']
         ];
 
         $this->cidades->update($_REQUEST['cidades_id'], $dataForm);

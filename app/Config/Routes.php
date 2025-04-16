@@ -35,6 +35,33 @@ $routes->post('/produtos/update', 'Produtos::update');
 $routes->post('/produtos/search', 'Produtos::search');
 $routes->get('/produtos/delete/(:any)', 'Produtos::delete/$1');
 
+$routes->get('/usuarios', 'Usuarios::index');
+$routes->get('/usuarios/index', 'Usuarios::index');
+$routes->get('/usuarios/new', 'Usuarios::new');
+$routes->post('/usuarios/create', 'Usuarios::create');
+$routes->get('/usuarios/edit/(:any)', 'Usuarios::edit/$1');
+$routes->get('/usuarios/delete/(:any)', 'Usuarios::delete/$1');
+$routes->post('/usuarios/update', 'Usuarios::update');
+$routes->post('/usuarios/search', 'Usuarios::search');
+
+$routes->get('/usuarios/edit_senha', 'Usuarios::edit_senha');
+$routes->post('/usuarios/salvar_senha', 'Usuarios::salvar_senha');
+
+$routes->get('/usuarios/edit_nivel', 'Usuarios::edit_nivel');
+$routes->post('/usuarios/salvar_nivel', 'Usuarios::salvar_nivel');
+
+$routes->get('/login', 'Login::index');
+$routes->get('/login/index', 'Login::index');
+$routes->post('/login/logar', 'Login::logar');
+$routes->get('/login/logout', 'Login::logout');
+
+
+$routes->get('/admin', 'Admin::index');
+$routes->get('/admin/index', 'Admin::index');
+
+$routes->get('/user', 'User::index');
+$routes->get('/user/index', 'User::index');
+
 $routes->get('/imgprodutos', 'Imgprodutos::index');
 $routes->get('/imgprodutos/index', 'Imgprodutos::index');
 $routes->get('/imgprodutos/new', 'Imgprodutos::new');
@@ -44,32 +71,12 @@ $routes->post('/imgprodutos/update', 'Imgprodutos::update');
 $routes->post('/imgprodutos/search', 'Imgprodutos::search');
 $routes->get('/imgprodutos/delete/(:any)', 'Imgprodutos::delete/$1');
 
-$routes->get('/usuarios', 'Usuarios::index');
-$routes->get('/usuarios/index', 'Usuarios::index');
-$routes->get('/usuarios/new', 'Usuarios::new');
-$routes->post('/usuarios/create', 'Usuarios::create');
-$routes->get('/usuarios/edit/(:any)', 'Usuarios::edit/$1');
-$routes->post('/usuarios/update', 'Usuarios::update');
-$routes->post('/usuarios/search', 'Usuarios::search');
 
-$routes->get('/usuarios/edit_nivel', 'Usuarios::edit_nivel');
-$routes->post('/usuarios/salvar_nivel', 'Usuarios::salvar_nivel');
 
-$routes->get('/usuarios/edit_senha', 'Usuarios::edit_senha');
-$routes->post('/usuarios/salvar_senha', 'Usuarios::salvar_senha');
 
-$routes->get('/usuarios/delete/(:any)', 'Usuarios::delete/$1');
 
-$routes->get('/login', 'Login::index');
-$routes->get('/login/index', 'Login::index');
-$routes->post('/login/logar', 'Login::logar');
-$routes->post('/login/logout', 'Login::logout');
 
-$routes->get('/user', 'User::index');
-$routes->get('/user/index', 'User::index');
 
-$routes->get('/admin', 'Admin::index');
-$routes->get('/admin/index', 'Admin::index');
 
 
 

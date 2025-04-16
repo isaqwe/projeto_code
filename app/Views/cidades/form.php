@@ -22,8 +22,9 @@
                 <label for="cidades_nome" class="form-label"> Cidade </label>
                 <input type="text" class="form-control" name="cidades_nome" value="<?= $cidades->cidades_nome; ?>"  id="cidades_nome">
             </div>
+
             <div class="mb-3">
-                <label for="cidades_UF" class="form-label"> Estado </label>
+                <label for="cidades_uf" class="form-label"> Estado </label>
                 <input type="text" class="form-control" name="cidades_uf" value="<?= $cidades->cidades_uf; ?>"  id="cidades_uf">
             </div>
 

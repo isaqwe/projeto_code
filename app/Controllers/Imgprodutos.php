@@ -36,7 +36,7 @@ class Imgprodutos extends BaseController
             'imgprodutos_produtos_id'=> '',
             'imgprodutos_id'=> ''
         ];
-        return view('imgprodutos/form',$data);
+        return view('Imgprodutos/form',$data);
     }
     public function create()
     {
@@ -65,7 +65,7 @@ class Imgprodutos extends BaseController
             $data['title'] = 'Imgprodutos';
             $data['form'] = 'Cadastrar';
             $data['op'] = 'create';
-            return view('imgprodutos/form',$data);
+            return view('Imgprodutos/form',$data);
         }
 
         $img = $this->request->getFile('imgprodutos_link');
@@ -133,7 +133,7 @@ class Imgprodutos extends BaseController
         $data['title'] = 'Imgprodutos';
         $data['form'] = 'Alterar';
         $data['op'] = 'update';
-        return view('imgprodutos/form',$data);
+        return view('Imgprodutos/form',$data);
     }
 
     public function update()

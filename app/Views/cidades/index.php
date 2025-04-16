@@ -28,8 +28,8 @@
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">UF</th>
-                    <th scope="col">Cidades</th>
+                    <th scope="col">Cidade</th>
+                    <th scope="col">Estado</th>
                     <th scope="col">
                         <a class="btn btn-success"  href="<?= base_url('cidades/new'); ?>">
                             Novo
@@ -44,8 +44,8 @@
                 <?php for($i=0; $i < count($cidades); $i++){ ?>
                     <tr>
                         <th scope="row"><?= $cidades[$i]->cidades_id; ?></th>
-                        <th scope="row"><?= $cidades[$i]->cidades_uf; ?></th>
                         <td><?= $cidades[$i]->cidades_nome; ?></td>
+                        <td><?= $cidades[$i]->cidades_uf; ?></td>
                         <td>
                             <a class="btn btn-primary"  href="<?= base_url('cidades/edit/'.$cidades[$i]->cidades_id); ?>">
                                 Editar

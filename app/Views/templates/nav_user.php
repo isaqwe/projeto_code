@@ -2,11 +2,9 @@
 <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary"
             data-bs-theme="dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="<?php echo base_url('/') ?>">
                     <!--Logo do Projeto-->
-                    <img src=<?= base_url("assets/images/bootstrap-logo.svg") ?> alt="Bootstrap"
-                        width="30" height="24">
-                    Bootstrap
+                    <img src="<?php echo base_url('assets/images/sd_logo.png') ?>" alt="SysDelivery" width="180">
                 </a>
                 <button class="navbar-toggler" type="button"
                     data-bs-toggle="collapse"

@@ -42,7 +42,6 @@ class Login extends BaseController
                     'usuarios_sobrenome' => $this->data['usuarios'][0]->usuarios_sobrenome,
                     'usuarios_cpf' => $this->data['usuarios'][0]->usuarios_cpf,
                     'usuarios_email' => $this->data['usuarios'][0]->usuarios_email,
-                    'usuarios_hash' => md5(123456),
                     'logged_in' => TRUE
                 ];
                 $this->session->set('login', $infoSession);
@@ -66,15 +65,15 @@ class Login extends BaseController
 
     public function logout()
     {
-        $this->session->remove('login');
+        // $this->session->remove('login');
         $this->data['msg'] = msg('Usuário desconectado','success');
-        return view('login',$this->data);
+        // return redirect()->route('home');
+        // //return redirect()->to('home');
+        session()->destroy(); // Destrói todos os dados da sessão
+        //return redirect('/'); // Redireciona para a página inicial
+        return view('home/index',$this->data);
     }
 
-    public function desconectado(){
-        $this->data = msg("O usuário não está logado!","danger");
-        return view('login',$this->data);
-    }
 
 
 }

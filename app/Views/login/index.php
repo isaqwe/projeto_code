@@ -7,8 +7,7 @@
                     class="mx-auto border border-1 border-secondary rounded p-5 col-lg-5  ">
                     <div class="text-center mt-3 mb-3">
                         <?php if(isset($msg)){echo $msg;} ?>
-                        <img width="80" src="assets/images/bootstrap-logo.svg"
-                            alt>
+                        <img src="<?php echo base_url('assets/images/sd_logo.png') ?>" alt="SysDelivery" width="180">
                         <h2 class="p-3">Aceso ao Sistema</h2>
                     </div>
 
