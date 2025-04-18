@@ -10,7 +10,7 @@
 <?= $this->section('content') ?>
 
 
-    <div class="container pt-4 pb-5 bg-light">
+    <div class="container pt-4 pb-5 bg-light ">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Admin</a></li>
