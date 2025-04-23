@@ -1,31 +1,64 @@
-<h2>Novo Endereço</h2>
-<form method="post" action="<?= site_url('enderecos/store') ?>">
-    <input type="hidden" name="usuario_id" value="<?= esc($usuario_id) ?>">
+<?= $this->extend('Templates_admin') ?>
+<?= $this->section('content') ?>
 
-    <label>Logradouro:</label>
-    <input type="text" name="logradouro" required><br>
+<div class="container">
+    <h2 class="border-bottom border-2 border-primary mt-3 mb-4"><?= $title ?></h2>
 
-    <label>Número:</label>
-    <input type="text" name="numero"><br>
+    <?php if (isset($msg)) echo $msg; ?>
 
-    <label>Bairro:</label>
-    <input type="text" name="bairro"><br>
+    <form action="<?= base_url('enderecos/update/' . $endereco->id) ?>" method="post">
 
-    <label>Complemento:</label>
-    <input type="text" name="complemento"><br>
+        <?= csrf_field() ?>
 
-    <label>CEP:</label>
-    <input type="text" name="cep"><br>
+        <!-- Campo CEP -->
+        <div class="mb-3">
+            <label for="cep" class="form-label">CEP</label>
+            <input type="text" class="form-control" id="cep" name="cep" value="<?= esc($endereco->cep) ?>" required>
+        </div>
 
-    <label>Cidade:</label>
-    <select name="cidade_id">
-        <?php foreach ($cidades as $cidade): ?>
-            <option value="<?= $cidade['id'] ?>"><?= esc($cidade['nome']) ?></option>
-        <?php endforeach; ?>
-    </select><br>
+        <!-- Campo Rua -->
+        <div class="mb-3">
+            <label for="rua" class="form-label">Rua</label>
+            <input type="text" class="form-control" id="rua" name="rua" value="<?= esc($endereco->rua) ?>" required>
+        </div>
 
-    <label>É o endereço principal?</label>
-    <input type="checkbox" name="is_principal" value="1"><br>
+        <!-- Campo Número -->
+        <div class="mb-3">
+            <label for="numero" class="form-label">Número</label>
+            <input type="text" class="form-control" id="numero" name="numero" value="<?= esc($endereco->numero) ?>" required>
+        </div>
 
-    <button type="submit">Salvar Endereço</button>
-</form>
+        <!-- Campo Complemento -->
+        <div class="mb-3">
+            <label for="complemento" class="form-label">Complemento</label>
+            <input type="text" class="form-control" id="complemento" name="complemento" value="<?= esc($endereco->complemento) ?>" required>
+        </div>
+
+        <!-- Campo Bairro -->
+        <div class="mb-3">
+            <label for="bairro" class="form-label">Bairro</label>
+            <input type="text" class="form-control" id="bairro" name="bairro" value="<?= esc($endereco->bairro) ?>" required>
+        </div>
+
+        <!-- Selecionar Cidade -->
+        <div class="mb-3">
+            <label for="cidade_id" class="form-label">Cidade</label>
+            <select class="form-select" id="cidade_id" name="cidade_id" required>
+                <option value="">Selecione a cidade</option>
+                <?php foreach ($cidades as $cidade): ?>
+                    <option value="<?= $cidade->cidades_id ?>" <?= $cidade->cidades_id == $endereco->cidade_id ? 'selected' : '' ?>>
+                        <?= esc($cidade->cidades_nome) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <!-- Não é necessário incluir usuario_id no formulário, pois é capturado diretamente do controlador -->
+        <input type="hidden" name="usuario_id" value="<?= session()->get('usuario_id'); ?>">
+
+        <!-- Botão de Enviar -->
+        <button type="submit" class="btn btn-primary">Atualizar</button>
+    </form>
+</div>
+
+<?= $this->endSection() ?>
