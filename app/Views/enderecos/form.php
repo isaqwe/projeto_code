@@ -1,64 +1,122 @@
+<?php
+    helper('functions');
+    session();
+    if(isset($_SESSION['login'])){
+        $login = $_SESSION['login'];
+        print_r($login);
+        if($login->usuarios_nivel == 1){
+    
+?>
 <?= $this->extend('Templates_admin') ?>
 <?= $this->section('content') ?>
 
-<div class="container">
-    <h2 class="border-bottom border-2 border-primary mt-3 mb-4"><?= $title ?></h2>
 
-    <?php if (isset($msg)) echo $msg; ?>
+<div class="container pt-4 pb-5 bg-light">
+    <h2 class="border-bottom border-2 border-primary">
+        <?= ucfirst($form).' '.$title ?>
+    </h2>
 
-    <form action="<?= base_url('enderecos/update/' . $endereco->id) ?>" method="post">
+    <?php if(isset($msg)){echo $msg;} ?>
 
-        <?= csrf_field() ?>
+    <form action="<?= base_url('enderecos/'.$op); ?>" method="post">
 
-        <!-- Campo CEP -->
         <div class="mb-3">
-            <label for="cep" class="form-label">CEP</label>
-            <input type="text" class="form-control" id="cep" name="cep" value="<?= esc($endereco->cep) ?>" required>
+            <label for="enderecos_cep" class="form-label"> CEP </label>
+            <input type="text" class="form-control" name="enderecos_cep" value="<?= $enderecos->enderecos_cep; ?>"
+                id="enderecos_cep">
         </div>
 
-        <!-- Campo Rua -->
         <div class="mb-3">
-            <label for="rua" class="form-label">Rua</label>
-            <input type="text" class="form-control" id="rua" name="rua" value="<?= esc($endereco->rua) ?>" required>
+            <label for="enderecos_logradouro" class="form-label"> Logradouro </label>
+            <input type="text" class="form-control" name="enderecos_logradouro"
+                value="<?= $enderecos->enderecos_logradouro; ?>" id="enderecos_logradouro">
         </div>
 
-        <!-- Campo Número -->
         <div class="mb-3">
-            <label for="numero" class="form-label">Número</label>
-            <input type="text" class="form-control" id="numero" name="numero" value="<?= esc($endereco->numero) ?>" required>
+            <label for="enderecos_numero" class="form-label"> Número </label>
+            <input type="text" class="form-control" name="enderecos_numero" value="<?= $enderecos->enderecos_numero; ?>"
+                id="enderecos_numero">
         </div>
 
-        <!-- Campo Complemento -->
         <div class="mb-3">
-            <label for="complemento" class="form-label">Complemento</label>
-            <input type="text" class="form-control" id="complemento" name="complemento" value="<?= esc($endereco->complemento) ?>" required>
+            <label for="enderecos_complemento" class="form-label"> Complemento </label>
+            <input type="text" class="form-control" name="enderecos_complemento"
+                value="<?= $enderecos->enderecos_complemento; ?>" id="enderecos_complemento">
         </div>
 
-        <!-- Campo Bairro -->
         <div class="mb-3">
-            <label for="bairro" class="form-label">Bairro</label>
-            <input type="text" class="form-control" id="bairro" name="bairro" value="<?= esc($endereco->bairro) ?>" required>
+            <label for="enderecos_bairro" class="form-label"> Bairro </label>
+            <input type="text" class="form-control" name="enderecos_bairro" value="<?= $enderecos->enderecos_bairro; ?>"
+                id="enderecos_bairro">
         </div>
 
-        <!-- Selecionar Cidade -->
+
         <div class="mb-3">
-            <label for="cidade_id" class="form-label">Cidade</label>
-            <select class="form-select" id="cidade_id" name="cidade_id" required>
-                <option value="">Selecione a cidade</option>
-                <?php foreach ($cidades as $cidade): ?>
-                    <option value="<?= $cidade->cidades_id ?>" <?= $cidade->cidades_id == $endereco->cidade_id ? 'selected' : '' ?>>
-                        <?= esc($cidade->cidades_nome) ?>
-                    </option>
-                <?php endforeach; ?>
+            <label for="enderecos_cidades_id" class="form-label"> Cidade </label>
+            <select class="form-control" name="enderecos_cidades_id" id="enderecos_cidades_id">
+
+                <?php 
+                    for($i=0; $i < count($cidades);$i++){ 
+                        $selected = '';
+                        if($cidades[$i]->cidades_id == $enderecos->enderecos_cidades_id){
+                            $selected = 'selected'; 
+                        }
+                    ?>
+
+                <option <?= $selected; ?> value="<?= $cidades[$i]->cidades_id; ?>">
+                    <?= $cidades[$i]->cidades_nome; ?>
+                </option>
+                <?php } ?>
+
             </select>
         </div>
 
-        <!-- Não é necessário incluir usuario_id no formulário, pois é capturado diretamente do controlador -->
-        <input type="hidden" name="usuario_id" value="<?= session()->get('usuario_id'); ?>">
+        <div class="mb-3">
+            <label for="enderecos_usuarios_id" class="form-label"> Usuário </label>
+            <select class="form-control" name="enderecos_usuarios_id" id="enderecos_usuarios_id">
 
-        <!-- Botão de Enviar -->
-        <button type="submit" class="btn btn-primary">Atualizar</button>
+                <?php 
+                    for($i=0; $i < count($usuarios);$i++){ 
+                        $selected = '';
+                        if($usuarios[$i]->usuarios_id == $enderecos->enderecos_usuarios_id){
+                            $selected = 'selected'; 
+                        }
+                    ?>
+
+                <option <?= $selected; ?> value="<?= $usuarios[$i]->usuarios_id; ?>">
+                    <?= $usuarios[$i]->usuarios_nome; ?>
+                </option>
+                <?php } ?>
+
+            </select>
+        </div>
+
+
+
+
+
+        <input type="hidden" name="enderecos_id" value="<?= $enderecos->enderecos_id; ?>">
+
+        <div class="mb-3">
+            <button class="btn btn-success" type="submit"> <?= ucfirst($form)  ?> <i class="bi bi-floppy"></i></button>
+        </div>
+
     </form>
+
 </div>
 
 <?= $this->endSection() ?>
+
+<?php 
+        }else{
+
+            $data['msg'] = msg("Sem permissão de acesso!","danger");
+            echo view('login',$data);
+        }
+    }else{
+
+        $data['msg'] = msg("O usuário não está logado!","danger");
+        echo view('login',$data);
+    }
+
+?>
