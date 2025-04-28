@@ -79,6 +79,15 @@ $routes->get('enderecos/edit/(:num)', 'Enderecos::edit/$1');
 $routes->post('enderecos/update/(:num)', 'Enderecos::update/$1');
 $routes->get('enderecos/delete/(:num)', 'Enderecos::delete/$1');
 
+$routes->get('clientes', 'Clientes::index/');
+$routes->get('clientes/create/(:num)', 'Clientes::create/$1');
+$routes->post('clientes/store', 'Clientes::store');
+$routes->get('/clientes/new', 'Clientes::new');
+$routes->get('clientes/edit/(:num)', 'Clientes::edit/$1');
+$routes->post('clientes/update/(:num)', 'Clientes::update/$1');
+$routes->get('clientes/delete/(:num)', 'Clientes::delete/$1');
+
+
 
 
 
