@@ -95,7 +95,13 @@ $routes->get('funcionarios/edit/(:num)', 'Funcionarios::edit/$1');
 $routes->post('funcionarios/update/(:num)', 'Funcionarios::update/$1');
 $routes->get('funcionarios/delete/(:num)', 'Funcionarios::delete/$1');
 
-
+$routes->get('estoques', 'Estoques::index/');
+$routes->get('estoques/create/(:num)', 'Estoques::create/$1');
+$routes->post('estoques/store', 'Estoques::store');
+$routes->get('/estoques/new', 'Estoques::new');
+$routes->get('estoques/edit/(:num)', 'Estoques::edit/$1');
+$routes->post('estoques/update/(:num)', 'Estoques::update/$1');
+$routes->get('estoques/delete/(:num)', 'Estoques::delete/$1');
 
 
 
