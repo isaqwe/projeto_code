@@ -8,7 +8,7 @@
                     <div class="text-center mt-3 mb-3">
                         <?php if(isset($msg)){echo $msg;} ?>
                         <img src="<?php echo base_url('assets/images/sd_logo.png') ?>" alt="SysDelivery" width="180">
-                        <h2 class="p-3">Aceso ao Sistema</h2>
+                        <h2 class="p-3">Acesso ao Sistema</h2>
                     </div>
 
                     <form action="<?php echo base_url('login/logar') ?>" method="post">
