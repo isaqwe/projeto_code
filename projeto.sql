@@ -210,6 +210,9 @@ CREATE TABLE `usuarios` (
   `usuarios_data_cadastro` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+INSERT INTO `usuarios` (`usuarios_id`, `usuarios_nome`, `usuarios_sobrenome`, `usuarios_email`, `usuarios_cpf`, `usuarios_nivel`, `usuarios_fone`, `usuarios_senha`, `usuarios_data_nasc`, `usuarios_data_cadastro`) VALUES
+(1, 'Admin', '', 'admin@admin.com', '999.999.999-99', 1, '(62)99999-999', 'e10adc3949ba59abbe56e057f20f883e', '1981-12-03', '2025-04-23 15:52:40');
+
 --
 -- Estrutura para tabela `vendas`
 --
