@@ -103,7 +103,29 @@ $routes->get('estoques/edit/(:num)', 'Estoques::edit/$1');
 $routes->post('estoques/update/(:num)', 'Estoques::update/$1');
 $routes->get('estoques/delete/(:num)', 'Estoques::delete/$1');
 
+$routes->get('entregas', 'Entregas::index/');
+$routes->get('entregas/create/(:num)', 'Entregas::create/$1');
+$routes->post('entregas/store', 'Entregas::store');
+$routes->get('/entregas/new', 'Entregas::new');
+$routes->get('entregas/edit/(:num)', 'Entregas::edit/$1');
+$routes->post('entregas/update/(:num)', 'Entregas::update/$1');
+$routes->get('entregas/delete/(:num)', 'Entregas::delete/$1');
 
+$routes->get('vendas', 'Vendas::index/');
+$routes->get('vendas/create/(:num)', 'Vendas::create/$1');
+$routes->post('vendas/store', 'Vendas::store');
+$routes->get('/vendas/new', 'Vendas::new');
+$routes->get('vendas/edit/(:num)', 'Vendas::edit/$1');
+$routes->post('vendas/update/(:num)', 'Vendas::update/$1');
+$routes->get('vendas/delete/(:num)', 'Vendas::delete/$1');
+
+$routes->get('pedidos', 'Pedidos::index/');
+$routes->get('pedidos/create/(:num)', 'Pedidos::create/$1');
+$routes->post('pedidos/store', 'Pedidos::store');
+$routes->get('/pedidos/new', 'Pedidos::new');
+$routes->get('pedidos/edit/(:num)', 'Pedidos::edit/$1');
+$routes->post('pedidos/update/(:num)', 'Pedidos::update/$1');
+$routes->get('pedidos/delete/(:num)', 'Pedidos::delete/$1');
 
 
 
