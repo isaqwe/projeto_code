@@ -10,11 +10,10 @@ class Cidades extends Model
     protected $table            = 'cidades';
     protected $primaryKey       = 'cidades_id';
     protected $useAutoIncrement = true;
-    // protected $returnType       = 'array';
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
-    protected $allowedFields    = ['cidades_nome', 'cidades_uf'];
+    protected $protectFields    = false;
+    protected $allowedFields    = ['cidades_nome','cidades_estados_id'];
 
     // Dates
     protected $useTimestamps = false;
@@ -23,7 +22,7 @@ class Cidades extends Model
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
-    // // Validation
+    // Validation
     // protected $validationRules      = [];
     // protected $validationMessages   = [];
     // protected $skipValidation       = false;
