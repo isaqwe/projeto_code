@@ -42,16 +42,17 @@ class Login extends BaseController
                     'usuarios_sobrenome' => $this->data['usuarios'][0]->usuarios_sobrenome,
                     'usuarios_cpf' => $this->data['usuarios'][0]->usuarios_cpf,
                     'usuarios_email' => $this->data['usuarios'][0]->usuarios_email,
+                    'usuarios_hash' => md5(123456),
                     'logged_in' => TRUE
                 ];
                 $this->session->set('login', $infoSession);
 
                 if($this->data['usuarios'][0]->usuarios_nivel == 0){
                     
-                    return view('user/index',$this->data);
+                    return view('User/index',$this->data);
                 }
                 elseif($this->data['usuarios'][0]->usuarios_nivel == 1){
-                    return view('admin/index',$this->data);
+                    return view('Admin/index',$this->data);
                 }else{
                     $this->data['msg'] = msg('Houve um problema com o seu acesso. Procure a Gerência de TI!','danger');
                     return view('login',$this->data);
@@ -65,15 +66,15 @@ class Login extends BaseController
 
     public function logout()
     {
-        // $this->session->remove('login');
+        $this->session->remove('login');
         $this->data['msg'] = msg('Usuário desconectado','success');
-        // return redirect()->route('home');
-        // //return redirect()->to('home');
-        session()->destroy(); // Destrói todos os dados da sessão
-        //return redirect('/'); // Redireciona para a página inicial
-        return view('home/index',$this->data);
+        return view('login',$this->data);
     }
 
+    public function desconectado(){
+        $this->data = msg("O usuário não está logado!","danger");
+        return view('login',$this->data);
+    }
 
 
 }

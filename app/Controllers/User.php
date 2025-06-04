@@ -6,6 +6,6 @@ class User extends BaseController
 {
     public function index(): string
     {
-        return view('user/index');
+        return view('User/index');
     }
 }

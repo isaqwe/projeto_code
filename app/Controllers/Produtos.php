@@ -19,7 +19,7 @@ class Produtos extends BaseController
         $data['title'] = 'Produtos';
         $data['produtos'] = $this->produtos->join('categorias', 'produtos_categorias_id = categorias_id')->find();
         //$data['produtos'] = $this->produtos->findAll();
-        return view('produtos/index',$data);
+        return view('Produtos/index',$data);
     }
 
     public function new(): string
@@ -36,7 +36,7 @@ class Produtos extends BaseController
             'produtos_categorias_id'=> '',
             'produtos_id'=> ''
         ];
-        return view('produtos/form',$data);
+        return view('Produtos/form',$data);
     }
     public function create()
     {
@@ -61,7 +61,7 @@ class Produtos extends BaseController
             $data['title'] = 'Produtos';
             $data['form'] = 'Cadastrar';
             $data['op'] = 'create';
-            return view('produtos/form',$data);
+            return view('Produtos/form',$data);
         }
 
 
@@ -76,7 +76,7 @@ class Produtos extends BaseController
         $data['msg'] = msg('Cadastrado com Sucesso!','success');
         $data['produtos'] = $this->produtos->join('categorias', 'produtos_categorias_id = categorias_id')->find();
         $data['title'] = 'Produtos';
-        return view('produtos/index',$data);
+        return view('Produtos/index',$data);
 
     }
 
@@ -96,7 +96,7 @@ class Produtos extends BaseController
         $data['title'] = 'Produtos';
         $data['form'] = 'Alterar';
         $data['op'] = 'update';
-        return view('produtos/form',$data);
+        return view('Produtos/form',$data);
     }
 
     public function update()
@@ -114,7 +114,7 @@ class Produtos extends BaseController
         $data['msg'] = msg('Alterado com Sucesso!','success');
         $data['produtos'] = $this->produtos->join('categorias', 'produtos_categorias_id = categorias_id')->find();
         $data['title'] = 'Produtos';
-        return view('produtos/index',$data);
+        return view('Produtos/index',$data);
     }
 
     public function search()
@@ -124,7 +124,8 @@ class Produtos extends BaseController
         $total = count($data['produtos']);
         $data['msg'] = msg("Dados Encontrados: {$total}",'success');
         $data['title'] = 'Produtos';
-        return view('produtos/index',$data);
+        return view('Produtos/index',$data);
+
     }
 
 }

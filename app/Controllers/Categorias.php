@@ -4,23 +4,18 @@ namespace App\Controllers;
 use App\Models\Categorias as Categorias_model;
 
 class Categorias extends BaseController
-{   
-    // variavel que recebe a instancia do model
-    private $categorias; 
-    
-    // metodo construtor
+{
+    private $categorias;
     public function __construct(){
-        $this->categorias = new Categorias_model(); // instancia do model
+        $this->categorias = new Categorias_model();
         $data['title'] = 'Categorias';
-        helper('functions'); // chama os metodos auxiliares
+        helper('functions');
     }
-
-    //
     public function index(): string
     {
         $data['title'] = 'Categorias';
         $data['categorias'] = $this->categorias->findAll();
-        return view('categorias/index',$data);
+        return view('Categorias/index',$data);
     }
 
     public function new(): string
@@ -32,7 +27,7 @@ class Categorias extends BaseController
             'categorias_nome'=> '',
             'categorias_id'=> ''
         ];
-        return view('categorias/form',$data);
+        return view('Categorias/form',$data);
     }
 
     
@@ -53,7 +48,7 @@ class Categorias extends BaseController
             $data['title'] = 'Categorias';
             $data['form'] = 'Cadastrar';
             $data['op'] = 'create';
-            return view('categorias/form',$data);
+            return view('Categorias/form',$data);
         }
 
 
@@ -65,7 +60,7 @@ class Categorias extends BaseController
         $data['msg'] = msg('Cadastrado com Sucesso!','success');
         $data['categorias'] = $this->categorias->findAll();
         $data['title'] = 'Categorias';
-        return view('categorias/index',$data);
+        return view('Categorias/index',$data);
 
     }
 
@@ -76,7 +71,7 @@ class Categorias extends BaseController
         $data['msg'] = msg('Deletado com Sucesso!','success');
         $data['categorias'] = $this->categorias->findAll();
         $data['title'] = 'Categorias';
-        return view('categorias/index',$data);
+        return view('Categorias/index',$data);
     }
 
     public function edit($id)
@@ -85,7 +80,7 @@ class Categorias extends BaseController
         $data['title'] = 'Categorias';
         $data['form'] = 'Alterar';
         $data['op'] = 'update';
-        return view('categorias/form',$data);
+        return view('Categorias/form',$data);
     }
 
     public function update()
@@ -99,7 +94,7 @@ class Categorias extends BaseController
         $data['msg'] = msg('Alterado com Sucesso!','success');
         $data['categorias'] = $this->categorias->findAll();
         $data['title'] = 'Categorias';
-        return view('categorias/index',$data);
+        return view('Categorias/index',$data);
     }
 
     public function search()
@@ -109,7 +104,7 @@ class Categorias extends BaseController
         $total = count($data['categorias']);
         $data['msg'] = msg("Dados Encontrados: {$total}",'success');
         $data['title'] = 'Categorias';
-        return view('categorias/index',$data);
+        return view('Categorias/index',$data);
 
     }
 

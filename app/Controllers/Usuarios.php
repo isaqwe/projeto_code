@@ -15,7 +15,7 @@ class Usuarios extends BaseController
     {
         $data['title'] = 'Usuarios';
         $data['usuarios'] = $this->usuarios->findAll();
-        return view('usuarios/index',$data);
+        return view('Usuarios/index',$data);
     }
 
     public function new(): string
@@ -33,7 +33,7 @@ class Usuarios extends BaseController
             'usuarios_data_nasc'=> '',
             'usuarios_id'=> ''
         ];
-        return view('usuarios/form',$data);
+        return view('Usuarios/form',$data);
     }
     public function create()
     {
@@ -64,7 +64,7 @@ class Usuarios extends BaseController
             $data['title'] = 'Usuarios';
             $data['form'] = 'Cadastrar';
             $data['op'] = 'create';
-            return view('usuarios/form',$data);
+            return view('Usuarios/form',$data);
         }
 
 
@@ -82,7 +82,7 @@ class Usuarios extends BaseController
         $data['msg'] = msg('Cadastrado com Sucesso!','success');
         $data['usuarios'] = $this->usuarios->findAll();
         $data['title'] = 'Usuarios';
-        return view('usuarios/index',$data);
+        return view('Usuarios/index',$data);
 
     }
 
@@ -92,7 +92,7 @@ class Usuarios extends BaseController
         $data['msg'] = msg('Deletado com Sucesso!','success');
         $data['usuarios'] = $this->usuarios->findAll();
         $data['title'] = 'Usuarios';
-        return view('usuarios/index',$data);
+        return view('Usuarios/index',$data);
     }
 
     public function edit($id)
@@ -101,7 +101,7 @@ class Usuarios extends BaseController
         $data['title'] = 'Usuarios';
         $data['form'] = 'Alterar';
         $data['op'] = 'update';
-        return view('usuarios/form',$data);
+        return view('Usuarios/form',$data);
     }
 
     public function update()
@@ -121,7 +121,7 @@ class Usuarios extends BaseController
         $data['msg'] = msg('Alterado com Sucesso!','success');
         $data['usuarios'] = $this->usuarios->findAll();
         $data['title'] = 'Usuarios';
-        return view('usuarios/index',$data);
+        return view('Usuarios/index',$data);
     }
 
     public function search()
@@ -131,7 +131,7 @@ class Usuarios extends BaseController
         $total = count($data['usuarios']);
         $data['msg'] = msg("Dados Encontrados: {$total}",'success');
         $data['title'] = 'Usuarios';
-        return view('usuarios/index',$data);
+        return view('Usuarios/index',$data);
 
     }
 
@@ -143,7 +143,7 @@ class Usuarios extends BaseController
         ];
 
         $data['title'] = 'Usuarios';
-        return view('usuarios/edit_senha',$data);
+        return view('Usuarios/edit_senha',$data);
     }
 
     public function salvar_senha():string {
@@ -151,8 +151,8 @@ class Usuarios extends BaseController
         // Checks whether the submitted data passed the validation rules.
         if(!$this->validate([
             'usuarios_senha_atual' => 'required',
-            'usuarios_nova_senha' => 'required|max_length[14]|min_length[6]',
-            'usuarios_confirmar_senha' => 'required|max_length[14]|min_length[6]'
+            'usuarios_nova_senha' => 'required|max_length[14]|min_length[8]',
+            'usuarios_confirmar_senha' => 'required|max_length[14]|min_length[8]'
         ])) {
             
             // The validation fails, so returns the form.
@@ -162,8 +162,8 @@ class Usuarios extends BaseController
                 'usuarios_confirmar_senha' => $_REQUEST['usuarios_confirmar_senha']
             ];
             $data['title'] = 'Usuarios';
-            $data['msg'] = msg("Divergência de dados ou a senha deve ter no mínimo 6 digitos!","danger");
-            return view('usuarios/edit_senha',$data);
+            $data['msg'] = msg("Divergência de dados","danger");
+            return view('Usuarios/edit_senha',$data);
         }
 
         $data['usuarios'] = (object) [
@@ -186,19 +186,19 @@ class Usuarios extends BaseController
                 $data['msg'] = msg('Senha alterada!','success');
                 $data['usuarios'] = $this->usuarios->findAll();
                 $data['title'] = 'Usuarios';
-                return view('usuarios/index',$data);
+                return view('Usuarios/index',$data);
 
 
             }else{
                 $data['title'] = 'Usuarios';
                 $data['msg'] = msg("As senhas não são iguais!","danger");
-                return view('usuarios/edit_senha',$data);
+                return view('Usuarios/edit_senha',$data);
             }
 
         }else{
             $data['title'] = 'Usuarios';
             $data['msg'] = msg("A senha atual é invalida","danger");
-            return view('usuarios/edit_senha',$data);
+            return view('Usuarios/edit_senha',$data);
         }
     }
     
@@ -206,8 +206,7 @@ class Usuarios extends BaseController
     {
         $data['nivel'] = [
             ['id' => 0, 'nivel' => "Usuário"],
-            ['id' => 1, 'nivel' => "Administrador"],
-            ['id' => 2, 'nivel' => "Supervisor"]
+            ['id' => 1, 'nivel' => "Administrador"]
         ];
 
         $data['usuarios'] = $this->usuarios->findAll();
@@ -216,7 +215,7 @@ class Usuarios extends BaseController
 
         $data['usuarios'] = $this->usuarios->findAll();
         $data['title'] = 'Usuarios';
-        return view('usuarios/edit_nivel',$data);
+        return view('Usuarios/edit_nivel',$data);
     }
 
     public function salvar_nivel(): string
@@ -231,7 +230,7 @@ class Usuarios extends BaseController
         $data['msg'] = msg('Nivel alterada!','success');
         $data['usuarios'] = $this->usuarios->findAll();
         $data['title'] = 'Usuarios';
-        return view('usuarios/index',$data);
+        return view('Usuarios/index',$data);
     }
 
 
