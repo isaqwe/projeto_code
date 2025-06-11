@@ -71,13 +71,15 @@ $routes->post('/imgprodutos/update', 'Imgprodutos::update');
 $routes->post('/imgprodutos/search', 'Imgprodutos::search');
 $routes->get('/imgprodutos/delete/(:any)', 'Imgprodutos::delete/$1');
 
+
 $routes->get('/enderecos', 'Enderecos::index');
-$routes->post('/enderecos/create', 'Enderecos::create');
-$routes->post('/enderecos/store', 'Enderecos::store');
+$routes->get('/enderecos/index', 'Enderecos::index');
 $routes->get('/enderecos/new', 'Enderecos::new');
+$routes->post('/enderecos/create', 'Enderecos::create');
 $routes->get('/enderecos/edit/(:any)', 'Enderecos::edit/$1');
-$routes->post('/enderecos/update/(:any)', 'Enderecos::update/$1');
 $routes->get('/enderecos/delete/(:any)', 'Enderecos::delete/$1');
+$routes->post('/enderecos/update', 'Enderecos::update');
+$routes->post('/enderecos/search', 'Enderecos::search');
 
 $routes->get('/clientes', 'Clientes::index');
 $routes->post('/clientes/create', 'Clientes::create');

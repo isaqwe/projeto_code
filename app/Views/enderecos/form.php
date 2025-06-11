@@ -19,6 +19,7 @@
     <?php if(isset($msg)){echo $msg;} ?>
 
     <form action="<?= base_url('enderecos/'.$op); ?>" method="post">
+        <?= csrf_field() ?>
 
         <div class="mb-3">
             <label for="enderecos_cep" class="form-label"> CEP </label>
