@@ -91,10 +91,6 @@
             </select>
         </div>
 
-
-
-
-
         <input type="hidden" name="enderecos_id" value="<?= $enderecos->enderecos_id; ?>">
 
         <div class="mb-3">

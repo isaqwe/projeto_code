@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql:3309
--- Tempo de geração: 05/06/2025 às 00:05
+-- Tempo de geração: 11/06/2025 às 22:54
 -- Versão do servidor: 8.0.41
 -- Versão do PHP: 8.2.27
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categorias` (
   `categorias_id` int NOT NULL,
-  `categorias_nome` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `categorias_nome` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -37,7 +37,9 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`categorias_id`, `categorias_nome`) VALUES
-(8, 'Pizzas');
+(8, 'Pizzas'),
+(9, 'Refrigerante'),
+(10, 'Hamburgues');
 
 -- --------------------------------------------------------
 
@@ -47,8 +49,8 @@ INSERT INTO `categorias` (`categorias_id`, `categorias_nome`) VALUES
 
 CREATE TABLE `cidades` (
   `cidades_id` int NOT NULL,
-  `cidades_nome` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `cidades_uf` varchar(2) COLLATE utf8mb4_general_ci NOT NULL
+  `cidades_nome` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `cidades_uf` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -56,7 +58,8 @@ CREATE TABLE `cidades` (
 --
 
 INSERT INTO `cidades` (`cidades_id`, `cidades_nome`, `cidades_uf`) VALUES
-(4, 'Ceres', 'GO');
+(4, 'Ceress', 'GO'),
+(6, 'Brasilia', 'DF');
 
 -- --------------------------------------------------------
 
@@ -66,9 +69,16 @@ INSERT INTO `cidades` (`cidades_id`, `cidades_nome`, `cidades_uf`) VALUES
 
 CREATE TABLE `clientes` (
   `clientes_id` int NOT NULL,
-  `clientes_data_cadastro` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `clientes_data_cadastro` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `clientes_usuarios_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `clientes`
+--
+
+INSERT INTO `clientes` (`clientes_id`, `clientes_data_cadastro`, `clientes_usuarios_id`) VALUES
+(8, '04/04/2025', 4);
 
 -- --------------------------------------------------------
 
@@ -78,11 +88,11 @@ CREATE TABLE `clientes` (
 
 CREATE TABLE `enderecos` (
   `enderecos_id` int NOT NULL,
-  `enderecos_cep` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `enderecos_logradouro` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `enderecos_numero` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `enderecos_complemento` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `enderecos_bairro` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `enderecos_cep` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `enderecos_logradouro` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `enderecos_numero` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `enderecos_complemento` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `enderecos_bairro` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `enderecos_cidades_id` int NOT NULL,
   `enderecos_usuarios_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -95,13 +105,20 @@ CREATE TABLE `enderecos` (
 
 CREATE TABLE `entregas` (
   `entregas_id` int NOT NULL,
-  `entregas_data_saida` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `entregas_data_entrega` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `entregas_status` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `entregas_observacao` text COLLATE utf8mb4_general_ci NOT NULL,
+  `entregas_data_saida` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `entregas_data_entrega` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `entregas_status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `entregas_observacao` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `entregas_vendas_id` int NOT NULL,
   `entregas_funcionarios_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `entregas`
+--
+
+INSERT INTO `entregas` (`entregas_id`, `entregas_data_saida`, `entregas_data_entrega`, `entregas_status`, `entregas_observacao`, `entregas_vendas_id`, `entregas_funcionarios_id`) VALUES
+(3, '04/04/2025', '', 'Entregue', 'Não', 2, 3);
 
 -- --------------------------------------------------------
 
@@ -111,13 +128,20 @@ CREATE TABLE `entregas` (
 
 CREATE TABLE `estoques` (
   `estoques_id` int NOT NULL,
-  `estoques_quantidade` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `estoques_data_compra` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `estoques_data_validade` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `estoques_lote` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `estoques_quantidade` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `estoques_data_compra` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `estoques_data_validade` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `estoques_lote` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `estoques_produtos_id` int NOT NULL,
   `estoques_funcionarios_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `estoques`
+--
+
+INSERT INTO `estoques` (`estoques_id`, `estoques_quantidade`, `estoques_data_compra`, `estoques_data_validade`, `estoques_lote`, `estoques_produtos_id`, `estoques_funcionarios_id`) VALUES
+(2, '10', '04/04/2025', '05/05/2025', '1', 5, 3);
 
 -- --------------------------------------------------------
 
@@ -127,8 +151,16 @@ CREATE TABLE `estoques` (
 
 CREATE TABLE `forma_pagamentos` (
   `forma_pagamentos_id` int NOT NULL,
-  `forma_pagamentos_descricao` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `forma_pagamentos_descricao` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `forma_pagamentos`
+--
+
+INSERT INTO `forma_pagamentos` (`forma_pagamentos_id`, `forma_pagamentos_descricao`) VALUES
+(4, 'Pix'),
+(5, 'Credito');
 
 -- --------------------------------------------------------
 
@@ -138,12 +170,19 @@ CREATE TABLE `forma_pagamentos` (
 
 CREATE TABLE `funcionarios` (
   `funcionarios_id` int NOT NULL,
-  `funcionarios_data_admissao` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `funcionarios_contrato` text COLLATE utf8mb4_general_ci NOT NULL,
+  `funcionarios_data_admissao` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `funcionarios_contrato` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `funcionarios_salario` float NOT NULL,
-  `funcionarios_cargo` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `funcionarios_cargo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `funcionarios_usuarios_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `funcionarios`
+--
+
+INSERT INTO `funcionarios` (`funcionarios_id`, `funcionarios_data_admissao`, `funcionarios_contrato`, `funcionarios_salario`, `funcionarios_cargo`, `funcionarios_usuarios_id`) VALUES
+(3, '04/04/2025', 'clt', 0, 'Caixa', 6);
 
 -- --------------------------------------------------------
 
@@ -153,8 +192,8 @@ CREATE TABLE `funcionarios` (
 
 CREATE TABLE `imgprodutos` (
   `imgprodutos_id` int NOT NULL,
-  `imgprodutos_link` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `imgprodutos_descricao` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `imgprodutos_link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `imgprodutos_descricao` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `imgprodutos_produtos_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -173,11 +212,18 @@ INSERT INTO `imgprodutos` (`imgprodutos_id`, `imgprodutos_link`, `imgprodutos_de
 
 CREATE TABLE `pedidos` (
   `pedidos_id` int NOT NULL,
-  `pedidos_data` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `pedidos_data` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `pedidos_produtos_id` int NOT NULL,
   `pedidos_funcionarios_id` int NOT NULL,
   `pedidos_clientes_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `pedidos`
+--
+
+INSERT INTO `pedidos` (`pedidos_id`, `pedidos_data`, `pedidos_produtos_id`, `pedidos_funcionarios_id`, `pedidos_clientes_id`) VALUES
+(3, '22/05/2024', 5, 3, 8);
 
 -- --------------------------------------------------------
 
@@ -187,8 +233,8 @@ CREATE TABLE `pedidos` (
 
 CREATE TABLE `produtos` (
   `produtos_id` int NOT NULL,
-  `produtos_nome` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `produtos_descricao` text COLLATE utf8mb4_general_ci NOT NULL,
+  `produtos_nome` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `produtos_descricao` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `produtos_preco_custo` float NOT NULL,
   `produtos_preco_venda` float NOT NULL,
   `produtos_categorias_id` int NOT NULL
@@ -209,13 +255,13 @@ INSERT INTO `produtos` (`produtos_id`, `produtos_nome`, `produtos_descricao`, `p
 
 CREATE TABLE `usuarios` (
   `usuarios_id` int NOT NULL,
-  `usuarios_nome` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `usuarios_sobrenome` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `usuarios_cpf` varchar(14) COLLATE utf8mb4_general_ci NOT NULL,
-  `usuarios_email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `usuarios_senha` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,
+  `usuarios_nome` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usuarios_sobrenome` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usuarios_cpf` varchar(14) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usuarios_email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usuarios_senha` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `usuarios_data_nasc` date NOT NULL,
-  `usuarios_fone` varchar(15) COLLATE utf8mb4_general_ci NOT NULL,
+  `usuarios_fone` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `usuarios_nivel` int NOT NULL,
   `usuarios_data_cadastro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -238,14 +284,21 @@ INSERT INTO `usuarios` (`usuarios_id`, `usuarios_nome`, `usuarios_sobrenome`, `u
 
 CREATE TABLE `vendas` (
   `vendas_id` int NOT NULL,
-  `vendas_quantidade` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `vendas_data` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `vendas_quantidade` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `vendas_data` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `vendas_forma_pagamentos_id` int NOT NULL,
   `vendas_funcionarios_id` int NOT NULL,
   `vendas_clientes_id` int NOT NULL,
   `vendas_produtos_id` int NOT NULL,
   `vendas_pedidos_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `vendas`
+--
+
+INSERT INTO `vendas` (`vendas_id`, `vendas_quantidade`, `vendas_data`, `vendas_forma_pagamentos_id`, `vendas_funcionarios_id`, `vendas_clientes_id`, `vendas_produtos_id`, `vendas_pedidos_id`) VALUES
+(2, '4', '30/08/2025', 4, 3, 8, 5, 3);
 
 --
 -- Índices para tabelas despejadas
@@ -351,19 +404,19 @@ ALTER TABLE `vendas`
 -- AUTO_INCREMENT de tabela `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `categorias_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `categorias_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `cidades`
 --
 ALTER TABLE `cidades`
-  MODIFY `cidades_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `cidades_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `clientes_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `clientes_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `enderecos`
@@ -375,25 +428,25 @@ ALTER TABLE `enderecos`
 -- AUTO_INCREMENT de tabela `entregas`
 --
 ALTER TABLE `entregas`
-  MODIFY `entregas_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `entregas_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `estoques`
 --
 ALTER TABLE `estoques`
-  MODIFY `estoques_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `estoques_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `forma_pagamentos`
 --
 ALTER TABLE `forma_pagamentos`
-  MODIFY `forma_pagamentos_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `forma_pagamentos_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `funcionarios`
 --
 ALTER TABLE `funcionarios`
-  MODIFY `funcionarios_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `funcionarios_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `imgprodutos`
@@ -405,7 +458,7 @@ ALTER TABLE `imgprodutos`
 -- AUTO_INCREMENT de tabela `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `pedidos_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `pedidos_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `produtos`
@@ -423,7 +476,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `vendas`
 --
 ALTER TABLE `vendas`
-  MODIFY `vendas_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `vendas_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restrições para tabelas despejadas

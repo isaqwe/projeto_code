@@ -71,32 +71,32 @@ $routes->post('/imgprodutos/update', 'Imgprodutos::update');
 $routes->post('/imgprodutos/search', 'Imgprodutos::search');
 $routes->get('/imgprodutos/delete/(:any)', 'Imgprodutos::delete/$1');
 
-$routes->get('enderecos', 'Enderecos::index/');
-$routes->get('enderecos/create/(:num)', 'Enderecos::create/$1');
-$routes->post('enderecos/store', 'Enderecos::store');
+$routes->get('/enderecos', 'Enderecos::index');
+$routes->post('/enderecos/create', 'Enderecos::create');
+$routes->post('/enderecos/store', 'Enderecos::store');
 $routes->get('/enderecos/new', 'Enderecos::new');
-$routes->get('enderecos/edit/(:num)', 'Enderecos::edit/$1');
-$routes->post('enderecos/update/(:num)', 'Enderecos::update/$1');
-$routes->get('enderecos/delete/(:num)', 'Enderecos::delete/$1');
+$routes->get('/enderecos/edit/(:any)', 'Enderecos::edit/$1');
+$routes->post('/enderecos/update/(:any)', 'Enderecos::update/$1');
+$routes->get('/enderecos/delete/(:any)', 'Enderecos::delete/$1');
 
-$routes->get('clientes', 'Clientes::index/');
-$routes->get('clientes/create/(:num)', 'Clientes::create/$1');
-$routes->post('clientes/store', 'Clientes::store');
+$routes->get('/clientes', 'Clientes::index');
+$routes->post('/clientes/create', 'Clientes::create');
+$routes->post('/clientes/store', 'Clientes::store');
 $routes->get('/clientes/new', 'Clientes::new');
-$routes->get('clientes/edit/(:num)', 'Clientes::edit/$1');
-$routes->post('clientes/update/(:num)', 'Clientes::update/$1');
-$routes->get('clientes/delete/(:num)', 'Clientes::delete/$1');
+$routes->get('/clientes/edit/(:any)', 'Clientes::edit/$1');
+$routes->post('/clientes/update', 'Clientes::update');
+$routes->get('/clientes/delete/(:num)', 'Clientes::delete/$1');
 
-$routes->get('funcionarios', 'Funcionarios::index/');
-$routes->get('funcionarios/create/(:num)', 'Funcionarios::create/$1');
-$routes->post('funcionarios/store', 'Funcionarios::store');
+$routes->get('/funcionarios', 'Funcionarios::index/');
+$routes->post('/funcionarios/create', 'Funcionarios::create');
+$routes->post('/funcionarios/store', 'Funcionarios::store');
 $routes->get('/funcionarios/new', 'Funcionarios::new');
-$routes->get('funcionarios/edit/(:num)', 'Funcionarios::edit/$1');
-$routes->post('funcionarios/update/(:num)', 'Funcionarios::update/$1');
-$routes->get('funcionarios/delete/(:num)', 'Funcionarios::delete/$1');
+$routes->get('/funcionarios/edit/(:any)', 'Funcionarios::edit/$1');
+$routes->post('/funcionarios/update/(:num)', 'Funcionarios::update/$1');
+$routes->get('/funcionarios/delete/(:num)', 'Funcionarios::delete/$1');
 
 $routes->get('estoques', 'Estoques::index/');
-$routes->get('estoques/create/(:num)', 'Estoques::create/$1');
+$routes->post('estoques/create', 'Estoques::create');
 $routes->post('estoques/store', 'Estoques::store');
 $routes->get('/estoques/new', 'Estoques::new');
 $routes->get('estoques/edit/(:num)', 'Estoques::edit/$1');
@@ -104,27 +104,27 @@ $routes->post('estoques/update/(:num)', 'Estoques::update/$1');
 $routes->get('estoques/delete/(:num)', 'Estoques::delete/$1');
 
 $routes->get('entregas', 'Entregas::index/');
-$routes->get('entregas/create/(:num)', 'Entregas::create/$1');
+$routes->post('entregas/create', 'Entregas::create');
 $routes->post('entregas/store', 'Entregas::store');
 $routes->get('/entregas/new', 'Entregas::new');
-$routes->get('entregas/edit/(:num)', 'Entregas::edit/$1');
-$routes->post('entregas/update/(:num)', 'Entregas::update/$1');
+$routes->get('entregas/edit/(:any)', 'Entregas::edit/$1');
+$routes->post('entregas/update', 'Entregas::update');
 $routes->get('entregas/delete/(:num)', 'Entregas::delete/$1');
 
 $routes->get('vendas', 'Vendas::index/');
-$routes->get('vendas/create/(:num)', 'Vendas::create/$1');
+$routes->post('vendas/create', 'Vendas::create');
 $routes->post('vendas/store', 'Vendas::store');
 $routes->get('/vendas/new', 'Vendas::new');
 $routes->get('vendas/edit/(:num)', 'Vendas::edit/$1');
-$routes->post('vendas/update/(:num)', 'Vendas::update/$1');
+$routes->post('vendas/update', 'Vendas::update');
 $routes->get('vendas/delete/(:num)', 'Vendas::delete/$1');
 
 $routes->get('pedidos', 'Pedidos::index/');
-$routes->get('pedidos/create/(:num)', 'Pedidos::create/$1');
+$routes->post('pedidos/create', 'Pedidos::create');
 $routes->post('pedidos/store', 'Pedidos::store');
 $routes->get('/pedidos/new', 'Pedidos::new');
 $routes->get('pedidos/edit/(:num)', 'Pedidos::edit/$1');
-$routes->post('pedidos/update/(:num)', 'Pedidos::update/$1');
+$routes->post('pedidos/update', 'Pedidos::update');
 $routes->get('pedidos/delete/(:num)', 'Pedidos::delete/$1');
 
 
