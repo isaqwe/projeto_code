@@ -109,13 +109,17 @@ class Cidades extends BaseController
 
     public function search()
     {
-
-        $data['cidades'] = $this->cidades->like('cidades_nome', $_REQUEST['pesquisar'])->find();
+        $search = $_REQUEST['pesquisar'] ?? '';
+        $data['cidades'] = $this->cidades
+            ->groupStart()
+                ->like('cidades_nome', $search)
+                ->orLike('cidades_uf', $search)
+            ->groupEnd()
+            ->find();
         $total = count($data['cidades']);
         $data['msg'] = msg("Dados Encontrados: {$total}",'success');
         $data['title'] = 'Cidades';
-        return view('cidades/index',$data);
-
+        return view('cidades/index', $data);
     }
 
 }

@@ -19,12 +19,20 @@ class Estoques extends BaseController
         helper('functions');
     }
 
-    public function index(): string
+    public function index()
     {
-        $data['title'] = 'Estoques';
-        $data['estoques'] = $this->estoques->getEstoquesComProdutosFuncionarios();
-        return view('Estoques/index',$data);
+        // Adicionando a checagem da sessão para a mensagem.
+        $data = [
+            'estoques' => $this->estoques
+                ->join('produtos', 'estoques_produtos_id = produtos_id')
+                ->join('funcionarios', 'estoques_funcionarios_id = funcionarios_id')
+                ->find(),
+            'title'    => 'Estoques',
+            'msg'      => session()->getFlashdata('msg')
+        ];
+        return view('Estoques/index', $data);
     }
+
     public function new(): string
     {
         $data['title'] = 'Estoques';
@@ -128,14 +136,27 @@ class Estoques extends BaseController
         return view('Estoques/index',$data);
     }
 
+    // search 
+
     public function search()
     {
-
-        $data['estoques'] = $this->estoques->join('produtos', 'estoques_produtos_id = produtos_id')->like('produtos_nome', $_REQUEST['pesquisar'])->join('funcionarios', 'estoques_funcionarios_id = funcionarios_id')->orlike('funcionarios_id', $_REQUEST['pesquisar'])->find();
+        $search = $_REQUEST['pesquisar'] ?? '';
+        $data['estoques'] = $this->estoques
+            ->join('produtos', 'estoques_produtos_id = produtos_id')
+            ->join('funcionarios', 'estoques_funcionarios_id = funcionarios_id')
+            ->groupStart()
+                ->like('estoques_id', $search)
+                ->orLike('estoques_quantidade', $search)
+                ->orLike('estoques_data_compra', $search)
+                ->orLike('estoques_data_validade', $search)
+                ->orLike('estoques_lote', $search)
+                ->orLike('estoques_produtos_id', $search)
+                ->orLike('estoques_funcionarios_id', $search)
+            ->groupEnd()
+            ->find();
         $total = count($data['estoques']);
         $data['msg'] = msg("Dados Encontrados: {$total}",'success');
         $data['title'] = 'Estoques';
         return view('Estoques/index',$data);
-
     }
 }

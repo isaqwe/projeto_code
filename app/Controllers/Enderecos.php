@@ -26,12 +26,12 @@ class Enderecos extends BaseController
     {
         // Adicionando a checagem da sessão para a mensagem.
         $data = [
-            'enderecos' => $this->enderecos->getEnderecosComUsuarios(),
+            'enderecos' => $this->enderecos->join('cidades', 'enderecos_cidades_id = cidades_id')->join('usuarios', 'enderecos_usuarios_id = usuarios_id')->find(), 
             'title'     => 'Endereços',
             'msg'       => session()->getFlashdata('msg')
         ];
         return view('Enderecos/index', $data);
-    }
+    } 
 
     public function new()
     {
@@ -137,5 +137,44 @@ class Enderecos extends BaseController
             session()->setFlashdata('msg', msg('Erro ao excluir!', 'danger'));
         }
         return redirect()->to('enderecos');
+    }
+
+    // search enderecos_cep enderecos_logradouro enderecos_numero enderecos_complemento  enderecos_bairro name in data base enderecos_cidades_id  enderecos_usuarios_id
+    // public function search()
+    // {
+    //     $searchTerm = $this->request->getPost('pesquisar');
+        
+    //     if (empty($searchTerm)) {
+    //         session()->setFlashdata('msg', msg('Nenhum dado foi informado para a pesquisa.', 'danger'));
+    //         return redirect()->to('enderecos');
+    //     }
+
+    //     $enderecos = $this->enderecos->like('enderecos_logradouro', $searchTerm)
+    //                                  ->orLike('enderecos_cep', $searchTerm)
+    //                                  ->findAll();
+
+    //     if (empty($enderecos)) {
+    //         session()->setFlashdata('msg', msg('Nenhum endereço encontrado para o termo pesquisado.', 'warning'));
+    //     } else {
+    //         session()->setFlashdata('msg', msg('Pesquisa realizada com sucesso!', 'success'));
+    //     }
+
+    //     $data = [
+    //         'enderecos' => $enderecos,
+    //         'title'     => 'Endereços',
+    //         'msg'       => session()->getFlashdata('msg')
+    //     ];
+    //     return view('Enderecos/index', $data);
+    // }
+
+     public function search()
+    {
+        //$data['usuarios'] = $this->usuarios->like('usuarios_nome', $_REQUEST['pesquisar'])->find();
+        $data['enderecos'] = $this->enderecos->join('cidades', 'enderecos_cidades_id = cidades_id')->join('usuarios', 'enderecos_usuarios_id = usuarios_id')->like('enderecos_logradouro', $_REQUEST['pesquisar'])->orlike('enderecos_cep', $_REQUEST['pesquisar'])->find();
+        $total = count($data['enderecos']);
+        $data['msg'] = msg("Dados Encontrados: {$total}",'success');
+        $data['title'] = 'Enderecos';
+        return view('Enderecos/index',$data);
+
     }
 }

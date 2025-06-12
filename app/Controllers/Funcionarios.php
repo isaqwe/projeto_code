@@ -122,13 +122,20 @@ class Funcionarios extends BaseController
 
     public function search()
     {
-        //$data['produtos'] = $this->produtos->like('produtos_nome', $_REQUEST['pesquisar'])->find();
-        $data['funcionarios'] = $this->funcionarios->join('usuarios', 'funcionarios_usuarios_id = usuarios_id')->like('funcionarios_contrato', $_REQUEST['pesquisar'])->orlike('funcionarios_cargo', $_REQUEST['pesquisar'])->find();
+        $search = $_REQUEST['pesquisar'] ?? '';
+        $data['funcionarios'] = $this->funcionarios
+            ->join('usuarios', 'funcionarios_usuarios_id = usuarios_id')
+            ->like('funcionarios_id', $search)
+            ->orLike('funcionarios_data_admissao', $search)
+            ->orLike('funcionarios_contrato', $search)
+            ->orLike('funcionarios_salario', $search)
+            ->orLike('funcionarios_cargo', $search)
+            ->orLike('funcionarios_usuarios_id', $search)
+            ->find();
         $total = count($data['funcionarios']);
-        $data['msg'] = msg("Dados Encontrados: {$total}",'success');
+        $data['msg'] = msg("Dados Encontrados: {$total}", 'success');
         $data['title'] = 'Funcionarios';
-        return view('Funcionarios/index',$data);
-
+        return view('Funcionarios/index', $data);
     }
 
 }

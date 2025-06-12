@@ -25,9 +25,10 @@ class Pedidos extends BaseController
     public function index(): string
     {
         $data['title'] = 'Pedidos';
-        $data['pedidos'] = $this->pedidos->getPedidosProdutosFuncClientes();
+        $data['pedidos'] = $this->pedidos->join('produtos', 'pedidos_produtos_id = produtos_id')->join('funcionarios', 'pedidos_funcionarios_id = funcionarios_id')->join('clientes', 'pedidos_clientes_id = clientes_id')->find();
         return view('Pedidos/index',$data);
-    }
+    } 
+    
     public function new(): string
     {
         $data['title'] = 'Pedidos';

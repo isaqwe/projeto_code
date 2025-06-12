@@ -108,13 +108,20 @@ class Clientes extends BaseController
 
     public function search()
     {
+        $search = $_REQUEST['pesquisar'] ?? '';
 
-        $data['clientes'] = $this->clientes->join('usuarios', 'clientes_usuarios_id = usuarios_id')->like('clientes_usuarios_id', $_REQUEST['pesquisar'])->find();
+        $builder = $this->clientes->join('usuarios', 'clientes_usuarios_id = usuarios_id');
+        $builder->groupStart()
+            ->like('clientes_id', $search)
+            ->orLike('clientes_data_cadastro', $search)
+            ->orLike('usuarios_nome', $search) // Search by user name instead of ID
+            ->groupEnd();
+
+        $data['clientes'] = $builder->find();
         $total = count($data['clientes']);
-        $data['msg'] = msg("Dados Encontrados: {$total}",'success');
+        $data['msg'] = msg("Dados Encontrados: {$total}", 'success');
         $data['title'] = 'Clientes';
-        return view('Clientes/index',$data);
-
+        return view('Clientes/index', $data);
     }
 
 }

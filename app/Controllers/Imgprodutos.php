@@ -152,15 +152,24 @@ class Imgprodutos extends BaseController
         return view('Imgprodutos/index',$data);
     }
 
+
     public function search()
     {
+        if (!isset($_REQUEST['pesquisar']) || empty($_REQUEST['pesquisar'])) {
+            $data['msg'] = msg('Nenhum dado foi informado para a pesquisa.','danger');
+            $data['title'] = 'Imgprodutos';
+            return view('Imgprodutos/index',$data);
+        }
 
-        $data['imgprodutos'] = $this->imgprodutos->like('imgprodutos_id', $_REQUEST['pesquisar'])->find();
+        $data['imgprodutos'] = $this->imgprodutos->like('imgprodutos_descricao', $_REQUEST['pesquisar'])->find();
         $total = count($data['imgprodutos']);
-        $data['msg'] = msg("Dados Encontrados: {$total}",'success');
+        if ($total == 0) {
+            $data['msg'] = msg('Nenhum dado encontrado.','warning');
+        } else {
+            $data['msg'] = msg("Dados Encontrados: {$total}",'success');
+        }
         $data['title'] = 'Imgprodutos';
         return view('Imgprodutos/index',$data);
-
     }
 
 }

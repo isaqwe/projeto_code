@@ -32,9 +32,10 @@ class Vendas extends BaseController
     public function index(): string
     {
         $data['title'] = 'Vendas';
-        $data['vendas'] = $this->vendas->getVendas();
+        $data['vendas'] = $this->vendas->join('forma_pagamentos', 'vendas_forma_pagamentos_id  = forma_pagamentos_id')->join('funcionarios', 'vendas_funcionarios_id = funcionarios_id')->join('clientes', 'vendas_clientes_id = clientes_id')->join('produtos', 'vendas_produtos_id = produtos_id')->join('pedidos', 'vendas_pedidos_id = pedidos_id')->find();
         return view('Vendas/index',$data);
-    }
+    } 
+
     public function new(): string
     {
         $data['title'] = 'Vendas';
@@ -155,7 +156,15 @@ class Vendas extends BaseController
     public function search()
     {
 
-        $data['vendas'] = $this->vendas->join('produtos', 'pedidos_produtos_id = produtos_id')->like('produtos_nome', $_REQUEST['pesquisar'])->join('funcionarios', 'pedidos_funcionarios_id = funcionarios_id')->orlike('funcionarios_id', $_REQUEST['pesquisar'])->join('clientes', 'pedidos_clientes_id = clientes_id')->orlike('clientes_id', $_REQUEST['pesquisar'])->find();
+        $data['vendas'] = $this->vendas
+            ->join('produtos', 'vendas_produtos_id = produtos_id')
+            ->like('produtos_nome', $_REQUEST['pesquisar'])
+            ->join('funcionarios', 'vendas_funcionarios_id = funcionarios_id')
+            ->orlike('funcionarios_id', $_REQUEST['pesquisar'])
+            ->join('clientes', 'vendas_clientes_id = clientes_id')
+            ->orlike('clientes_id', $_REQUEST['pesquisar'])
+            ->find();
+        $data['pedidos'] = $this->pedidos->findAll();
         $total = count($data['pedidos']);
         $data['msg'] = msg("Dados Encontrados: {$total}",'success');
         $data['title'] = 'Vendas';
